@@ -9,10 +9,17 @@ terraform {
 }
 
 provider "aws" {
-    region = "us-east-1"
+    region = var.aws_region
     access_key = ""
     secret_key = ""
-    profile    = "tf"
+    profile    = ""
+}
+
+resource "aws_instance" "web" {
+  ami = var.instance_ami
+  instance_type = var.instance_type
+
+  tags = var.instance_tags
 }
 
 resource "aws_s3_bucket" "bucket_name" {
